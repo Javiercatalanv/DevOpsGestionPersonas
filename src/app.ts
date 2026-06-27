@@ -8,17 +8,18 @@ interface Persona {
   rut: string;
   fechaNacimiento: string;
   ciudad: string;
+  gustos: string[];
 }
 
 let personas: Persona[] = [];
 
 // POST para personas
 app.post('/personas', (req: Request, res: Response) => {
-  const { nombre, rut, fechaNacimiento, ciudad } = req.body;
-  if (!nombre || !rut || !fechaNacimiento || !ciudad) {
+  const { nombre, rut, fechaNacimiento, ciudad, gustos } = req.body;
+  if (!nombre || !rut || !fechaNacimiento || !ciudad || !gustos) {
     return res.status(400).json({ error: 'Faltan campos obligatorios' });
   }
-  const persona: Persona = { id: Date.now(), nombre, rut, fechaNacimiento, ciudad };
+  const persona: Persona = { id: Date.now(), nombre, rut, fechaNacimiento, ciudad, gustos };
   personas.push(persona);
   return res.status(201).json(persona);
 });

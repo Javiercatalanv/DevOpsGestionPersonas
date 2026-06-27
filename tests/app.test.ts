@@ -9,7 +9,7 @@ describe('POST /personas', () => {
   it('agrega una persona correctamente', async () => {
     const res = await request(app).post('/personas').send({
       nombre: 'Juan Pérez', rut: '12345678-9',
-      fechaNacimiento: '1990-01-01', ciudad: 'Santiago'
+      fechaNacimiento: '1990-01-01', ciudad: 'Santiago', gustos: ['leer', 'viajar']
     });
     expect(res.status).toBe(201);
     expect(res.body.nombre).toBe('Juan Pérez');
@@ -33,7 +33,7 @@ describe('GET /personas', () => {
   it('retorna personas agregadas', async () => {
     await request(app).post('/personas').send({
       nombre: 'Ana García', rut: '98765432-1',
-      fechaNacimiento: '1995-05-10', ciudad: 'Valparaíso'
+      fechaNacimiento: '1995-05-10', ciudad: 'Valparaíso', gustos: ['leer', 'viajar']
     });
     const res = await request(app).get('/personas');
     expect(res.body.length).toBe(1);
@@ -46,7 +46,7 @@ describe('DELETE /personas/:rut', () => {
   it('elimina una persona existente', async () => {
     await request(app).post('/personas').send({
       nombre: 'Ana García', rut: '98765432-1',
-      fechaNacimiento: '1995-05-10', ciudad: 'Valparaíso'
+      fechaNacimiento: '1995-05-10', ciudad: 'Valparaíso', gustos: ['leer', 'viajar']
     });
     const res = await request(app).delete('/personas/98765432-1');
     expect(res.status).toBe(204);
